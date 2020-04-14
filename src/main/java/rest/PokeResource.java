@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import utils.EMF_Creator;
 import facades.FacadeExample;
 import facades.PokemonFacade;
+import java.io.IOException;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -35,8 +36,16 @@ public class PokeResource {
     @Path("/{id}")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getPokemonById(@PathParam("id") int id) {
+    public String getPokemonById(@PathParam("id") int id) throws IOException {
         return GSON.toJson(FACADE.getPokemonById(id)); 
+    }
+
+    
+    @Path("/name/{name}")
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getPokemonById(@PathParam("name") String name) throws IOException {
+        return GSON.toJson(FACADE.getPokemonById(name)); 
     }
 
     
