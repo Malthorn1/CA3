@@ -4,29 +4,28 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.CatFactDTO;
 import dtos.CombinedDTO;
+import dtos.UselessFactDTO;
 import dtos.pokeDTO;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 import utils.HttpUtils;
 
 //This endpoint is  used  to demo asynchronous  fetching with Futures
 @Path("asyncdemo")
 public class asyncdemo {
-    
-
-    
+   
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private ExecutorService executor  = Executors.newFixedThreadPool(4);
     
@@ -42,23 +41,26 @@ public class asyncdemo {
     
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAll() throws IOException, InterruptedException, ExecutionException {
-        
-        
-        
-        
+    public void getAll(@Suspended final AsyncResponse ar) throws IOException, InterruptedException, ExecutionException {
+      
         Future<String>  catFuture = getDataAsync("https://cat-fact.herokuapp.com/facts/random");
         String catFact = catFuture.get();
         
         Future<String>  pokemonFuture = getDataAsync("https://pokeapi.co/api/v2/pokemon/1");
         String pokemon   =  pokemonFuture.get();
         
+        Future<String> uselessFuture  = getDataAsync("https://uselessfacts.jsph.pl/random.json?language=en");
+        String uselessFact = uselessFuture.get();
+        
         CatFactDTO cfDTO = GSON.fromJson(catFact, CatFactDTO.class);
         pokeDTO pDTO = GSON.fromJson(pokemon,  pokeDTO.class);
+        UselessFactDTO  ufDTO = GSON.fromJson(uselessFact, UselessFactDTO.class);
         
-        CombinedDTO combined  = new CombinedDTO(cfDTO, pDTO);
+        CombinedDTO combined  = new CombinedDTO(cfDTO, pDTO,  ufDTO);
+        String result = GSON.toJson(combined);
+        ar.resume(result);
+        executor.shutdown();
         
-        return  GSON.toJson(combined);
         
     }
     
