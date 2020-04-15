@@ -8,7 +8,6 @@ package rest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.UselessFactDTO;
-
 import facades.FacadeExample;
 import java.io.IOException;
 import javax.persistence.EntityManagerFactory;
@@ -24,8 +23,7 @@ import utils.HttpUtils;
  * @author Aske
  */
 @Path("uselessfact")
-public class UsslessFactsResource {
-    
+public class UsslessFactResource {
     
         Gson  gson = new Gson();
 
@@ -38,24 +36,23 @@ public class UsslessFactsResource {
     private static final FacadeExample FACADE =  FacadeExample.getFacadeExample(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     
-    
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getCatFact() throws IOException {
-        String uselessFact = HttpUtils.fetchData("https://uselessfacts.jsph.pl/random.json?language=en");
-        
-        UselessFactDTO ufDTO = gson.fromJson(uselessFact, UselessFactDTO.class);
-        
-        return  gson.toJson(ufDTO);
-        
-    }
-    
     @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
         long count = FACADE.getRenameMeCount();
         return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+    }
+    
+    
+    @GET
+    @Produces({MediaType.APPLICATION_JSON})
+    public String getCatFact() throws IOException {
+        String uselessFact = HttpUtils.fetchData("https://uselessfacts.jsph.pl/random.json?language=en");
+        UselessFactDTO ufDTO = gson.fromJson(uselessFact, UselessFactDTO.class);
+        
+        return  gson.toJson(ufDTO);
+        
     }
 
 }

@@ -11,25 +11,17 @@ package dtos;
  */
 public class UselessFactDTO {
     
-    String id;
     String text;
 
-    public UselessFactDTO(String id, String text) {
-        this.id = id;
+    public UselessFactDTO( String text) {
+    
         this.text = text;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getText() {
         return text;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public void setText(String text) {
         this.text = text;
