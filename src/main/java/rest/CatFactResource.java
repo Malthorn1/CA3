@@ -30,6 +30,9 @@ public class CatFactResource {
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getCatFact() throws IOException {
+        
+        
+        
         String catFact = HttpUtils.fetchData("https://cat-fact.herokuapp.com/facts/random");
         
         CatFactDTO cfDTO = gson.fromJson(catFact, CatFactDTO.class);
