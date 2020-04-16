@@ -13,11 +13,27 @@ public class KanyeDTO {
     
     private String text;
     private String createdAt;
+    private String quote; 
 
     public KanyeDTO(String text, String createdAt) {
         this.text = text;
         this.createdAt = createdAt;
     }
+
+    public KanyeDTO(String text, String createdAt, String quote) {
+        this.text = text;
+        this.createdAt = createdAt;
+        this.quote = quote;
+    }
+
+    public String getQuote() {
+        return quote;
+    }
+
+    public void setQuote(String quote) {
+        this.quote = quote;
+    }
+    
 
     public String getText() {
         return text;
