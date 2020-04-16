@@ -6,6 +6,7 @@ import dtos.CatFactDTO;
 import utils.EMF_Creator;
 import facades.FacadeExample;
 import java.io.IOException;
+import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -14,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import utils.HttpUtils;
 
 //Todo Remove or change relevant parts before ACTUAL use
+@RolesAllowed("user")
 @Path("catfact")
 public class CatFactResource {
     Gson  gson = new Gson();
