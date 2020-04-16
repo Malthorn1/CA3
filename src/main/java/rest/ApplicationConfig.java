@@ -27,6 +27,7 @@ public class ApplicationConfig extends Application {
         resources.add(org.glassfish.jersey.server.wadl.internal.WadlResource.class);
         resources.add(rest.CatFactResource.class);
         resources.add(rest.DemoResource.class);
+        resources.add(rest.KanyeResource.class);
         resources.add(rest.PokeResource.class);
         resources.add(rest.RenameMeResource.class);
         resources.add(rest.UsslessFactResource.class);
