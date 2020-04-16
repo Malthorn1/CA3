@@ -14,11 +14,14 @@ public class CatFactDTO {
     private String text;
     private String createdAt;
 
+    
+    public CatFactDTO(){}
     public CatFactDTO(String text, String createdAt) {
         this.text = text;
         this.createdAt = createdAt;
     }
-
+    
+    
     public String getText() {
         return text;
     }
