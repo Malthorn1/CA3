@@ -14,11 +14,12 @@ public class CombinedDTO {
     private String catFact;
     private String pokemonName;
     private String uselessFact;
-    
-    public  CombinedDTO(CatFactDTO  cfDTO,  pokeDTO pDTO, UselessFactDTO ufDTO){
+    private String kanyeQuote;
+    public  CombinedDTO(CatFactDTO  cfDTO,  pokeDTO pDTO, UselessFactDTO ufDTO, KanyeDTO kDTO){
         this.catFact = cfDTO.getText();
         this.pokemonName = pDTO.getName();
         this.uselessFact = ufDTO.getText();
+        this.kanyeQuote = kDTO.getQuote();
     }
     
 }
