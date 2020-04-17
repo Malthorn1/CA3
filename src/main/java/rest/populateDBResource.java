@@ -24,15 +24,15 @@ public class populateDBResource {
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
                 "pu",
-                "jdbc:mysql://localhost:3307/ca3",
+                "jdbc:mysql://localhost:3306/ca3",
                 "dev",
                 "ax2",
-                EMF_Creator.Strategy.CREATE);
+                EMF_Creator.Strategy.DROP_AND_CREATE);
     private static final UserFacade FACADE =  UserFacade.getUserFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
             
 
-    @Path("counters")
+    @Path("fill")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
