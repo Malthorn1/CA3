@@ -32,7 +32,7 @@ public class populateDBResource {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
             
 
-    @Path("count")
+    @Path("counters")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
