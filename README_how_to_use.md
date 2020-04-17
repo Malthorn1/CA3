@@ -29,7 +29,9 @@
 <h2> Personalize your project </h2>
 
 - Delete or Refactor Entity, Facade and Resources for your new project. 
-- <b> Verify that your Resources has the correct database name. </b>
+- <b> Verify that your Resources has the correct database name.  <br>
+Also make sure that config.properties hans the correct database information </b>
+
 - Clean and build your project (if you use netbeans repeat this step 3 or more times) 
 - Test your project again with "mvn test" or "IDE test", if it fails its a do-over.
 
