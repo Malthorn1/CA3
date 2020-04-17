@@ -32,14 +32,14 @@ public class populateDBResource {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
             
 
-    @Path("fill")
+    @Path("count")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
         String[] args = null;
        FACADE.populateDB(); 
       //  long count = FACADE.getRenameMeCount();
-        return "";  //Done manually so no need for a DTO 
+        return "Hej";  //Done manually so no need for a DTO 
     }
 
  
