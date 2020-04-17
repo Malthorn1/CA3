@@ -4,7 +4,9 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dtos.CatFactDTO;
 import utils.EMF_Creator;
+import utils.SetupTestUsers; 
 import facades.FacadeExample;
+import facades.UserFacade;
 import java.io.IOException;
 import javax.annotation.security.RolesAllowed;
 import javax.persistence.EntityManagerFactory;
@@ -15,9 +17,9 @@ import javax.ws.rs.core.MediaType;
 import utils.HttpUtils;
 
 //Todo Remove or change relevant parts before ACTUAL use
-@RolesAllowed("user")
-@Path("catfact")
-public class CatFactResource {
+
+@Path("db")
+public class populateDBResource {
     Gson  gson = new Gson();
 
     private static final EntityManagerFactory EMF = EMF_Creator.createEntityManagerFactory(
@@ -26,28 +28,18 @@ public class CatFactResource {
                 "dev",
                 "ax2",
                 EMF_Creator.Strategy.CREATE);
-    private static final FacadeExample FACADE =  FacadeExample.getFacadeExample(EMF);
+    private static final UserFacade FACADE =  UserFacade.getUserFacade(EMF);
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
             
-    @GET
-    @Produces({MediaType.APPLICATION_JSON})
-    public String getCatFact() throws IOException {
-        
-        
-        
-        String catFact = HttpUtils.fetchData("https://cat-fact.herokuapp.com/facts/random");
-        
-        CatFactDTO cfDTO = gson.fromJson(catFact, CatFactDTO.class);
-        
-        return  gson.toJson(cfDTO);
-        
-    }
-    @Path("count")
+
+    @Path("fill")
     @GET
     @Produces({MediaType.APPLICATION_JSON})
     public String getRenameMeCount() {
-        long count = FACADE.getRenameMeCount();
-        return "{\"count\":"+count+"}";  //Done manually so no need for a DTO
+        String[] args = null;
+       FACADE.populateDB(); 
+      //  long count = FACADE.getRenameMeCount();
+        return "";  //Done manually so no need for a DTO 
     }
 
  
