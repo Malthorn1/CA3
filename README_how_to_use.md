@@ -50,7 +50,7 @@ export CONNECTION_STR="jdbc:mysql://localhost:3306/<b>NAME_OF_YOUR_DB</b>" <br>
 - Save the file, and restart Tomcat with the command below <br>
 <b> "sudo systemctl restart tomcat" </b>
 
-- In Git-BASH deploy your project with the command below, make sure to change <b> PW_FOR_script_user </b> for your actual value<br> 
+- In your local Git-BASH deploy your project with the command below, make sure to change <b> PW_FOR_script_user </b> for your actual value<br> 
 <b> " mvn clean test -Dremote.user=script_user -Dremote.password=PW_FOR_script_user tomcat7:deploy " </b>
  
 - At this point your project should be deployed on your droplet. 
